@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <style media="screen">
+      *{margin:1px;
+        padding-top: 2px;
+ padding-right: 2px;
+ padding-bottom: 0px;
+ padding-left: 12px;
+      }
+      .button {
+        width: 50px;
+        height:25px;
+        font-size: 4px;
+        margin:2px;
+        cursor: pointer;
+        font-size: 16px;
+         background-color: #FF4500;
+         color: white;
+         text-align: center;
+         border-radius: 8px;
+      }
+      .textview {
+        width: 255px;
+        margin: 1px;
+        font-size: 25px;
+        padding: 0px;
+        padding-left: 1px;
+        border-radius: 8px;
+
+      }
+      .main{
+        display:block;
+        border-style: solid;
+          width: 300px;
+            height:250px;
+             text-align: center;
+             padding-top: 40px;
+             padding-right: 20px;
+              background-color: #CFCFCF;
+              border-radius: 8px;
+
+
+      }
+      #resultadotela{
+        display:block;
+        text-align: center;
+        font-size: 16px;
+        margin-bottom: 20px;
+        width:250px;
+        height: 45px;
+        line-height: 35px;
+        vertical-align: middle;
+        background-color:#fff;
+        border-radius: 10px;
+        overflow-y: scroll;
+      }
+    </style>
+    <meta charset="utf-8">
+
+    <title>Calculadora</title>
+  </head>
+  <body>
+    <div class="main">
+      <h3>Calculadora</h3>
+      <table>
+        <tr>
+          <td colspan="6"><span id="resultadotela"></span></td>
+        </tr>
+      <tr>
+        <td><button class="button" id="reset">C</button></td>
+        <td><button class="button" id="zero">0</button></td>
+        <td><button  class="button" id="divisao">/</button></td>
+        <td><button  class="button" id="multiplicar">x</button></td>
+      </tr>
+      <tr>
+        <td><button  class="button" id="sete">7</button></td>
+        <td><button  class="button" id="oito">8</button></td>
+        <td><button  class="button" id="nove">9</button></td>
+        <td><button  class="button" id="soma">+</button></td>
+      </tr>
+      <tr>
+        <td><button  class="button" id="quatro">4</button></td>
+        <td><button  class="button" id="cinco">5</button></td>
+        <td><button  class="button" id="seis">6</button></td>
+        <td><button  class="button" id="subtracao">-</button></td>
+      </tr>
+      <tr>
+        <td><button  class="button" id="um">1</button></td>
+        <td><button  class="button" id="dois">2</button></td>
+        <td><button  class="button" id="tres">3</button></td>
+        <td><button  class="button" id="resultado">=</button></td>
+      </tr>
+      </table>
+    </div>
+    <script>
+
+    var operandoa;
+    var operandob;
+    var operacion;
+
+    function init(){
+      //variables
+      var resultado = document.getElementById('resultado');
+      var reset = document.getElementById('reset');
+      var soma = document.getElementById('soma');
+      var subtracao = document.getElementById('subtracao');
+      var multiplicar = document.getElementById('multiplicar');
+      var divisao = document.getElementById('divisao');
+      var resultado = document.getElementById('resultado');
+      var um = document.getElementById('um');
+      var dois = document.getElementById('dois');
+      var tres = document.getElementById('tres');
+      var quatro = document.getElementById('quatro');
+      var cinco = document.getElementById('cinco');
+      var seis = document.getElementById('seis');
+      var sete = document.getElementById('sete');
+      var oito = document.getElementById('oito');
+      var nove = document.getElementById('nove');
+      var zero = document.getElementById('zero');
+    }
+
+    //Eventos de click
+      um.onclick = function(e){
+          resultadotela.textContent = resultadotela.textContent  + "1";
+      }
+      dois.onclick = function(e){
+          resultadotela.textContent = resultadotela.textContent  + "2";
+      }
+      tres.onclick = function(e){
+          resultadotela.textContent = resultadotela.textContent  + "3";
+      }
+      quatro.onclick = function(e){
+          resultadotela.textContent = resultadotela.textContent  + "4";
+      }
+      cinco.onclick = function(e){
+          resultadotela.textContent = resultadotela.textContent  + "5";
+      }
+      seis.onclick = function(e){
+          resultadotela.textContent = resultadotela.textContent  + "6";
+      }
+      sete.onclick = function(e){
+          resultadotela.textContent = resultadotela.textContent  + "7";
+      }
+      oito.onclick = function(e){
+          resultadotela.textContent = resultadotela.textContent  + "8";
+      }
+      nove.onclick = function(e){
+          resultadotela.textContent = resultadotela.textContent  + "9";
+      }
+      zero.onclick = function(e){
+          resultadotela.textContent = resultadotela.textContent  + "0";
+      }
+
+      reset.onclick = function(e){
+          resetar();
+      }
+      soma.onclick = function(e){
+          operandoa = resultadotela.textContent;
+          operacion = "+";
+          limpar();
+      }
+  subtracao.onclick = function(e){
+          operandoa = resultadotela.textContent;
+          operacion = "-";
+          limpar();
+      }
+    multiplicar.onclick = function(e){
+          operandoa = resultadotela.textContent;
+          operacion = "*";
+        limpar();
+      }
+      divisao.onclick = function(e){
+          operandoa = resultadotela.textContent;
+          operacion = "/";
+          limpar();
+      }
+      resultado.onclick =function(e){
+          operandob = resultadotela.textContent;
+          resolver();
+      }
+
+      function limpar(){
+      resultadotela.textContent = "";
+    }
+    function resetar(){
+      resultadotela.textContent = "";
+      operandoa = 0;
+      operandob = 0;
+      operacion = "";
+    }
+
+    function resolver(){
+      var res = 0;
+      switch(operacion){
+        case "+":
+          res = parseFloat(operandoa) + parseFloat(operandob);
+          break;
+        case "-":
+            res = parseFloat(operandoa) - parseFloat(operandob);
+            break;
+        case "*":
+          res = parseFloat(operandoa) * parseFloat(operandob);
+          break;
+        case "/":
+          res = parseFloat(operandoa) / parseFloat(operandob);
+          break;
+      }
+      resetar();
+      resultadotela.textContent = res;
+    }
+
+
+    </script>
+
+  </body>
+</html>
